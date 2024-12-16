@@ -13,7 +13,7 @@ namespace MainApp.Model
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string PhoneNumber { get; set; } //behöver vara en sträng pga för många siffror för int
+        public string PhoneNumber { get; set; } //behöver vara en sträng då ett telefonnummer kan innehålla icke numeriska värden så som +, - samt ()
         public Address Adress { get; set; }
 
         [JsonConstructor]
