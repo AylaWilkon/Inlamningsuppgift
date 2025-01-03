@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace MainApp.Model
+namespace MainApp.UserService.Model
 {
     public class User
     {
@@ -22,7 +22,7 @@ namespace MainApp.Model
 
         }
 
-        public User( string firstName, string lastName, string email, string phoneNumber, string streetAdress, string postalCode, string city)
+        public User(string firstName, string lastName, string email, string phoneNumber, string streetAdress, string postalCode, string city)
         {
             Id = Guid.NewGuid();
             FirstName = firstName;
