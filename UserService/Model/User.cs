@@ -9,7 +9,7 @@ namespace MainApp.UserService.Model
 {
     public class User
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } //skapar en unik identifierare av typen guid varje gång ett nytt User objekt skapas
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -17,12 +17,14 @@ namespace MainApp.UserService.Model
         public Address Adress { get; set; }
 
         [JsonConstructor]
+        //Konstruktor som bara ska användas när objektet skapas från JSON-data
         private User()
         {
 
         }
 
         public User(string firstName, string lastName, string email, string phoneNumber, string streetAdress, string postalCode, string city)
+            //publik konstruktor som gör att man kan skapa en ny användare med alla dessa egenskaper
         {
             Id = Guid.NewGuid();
             FirstName = firstName;

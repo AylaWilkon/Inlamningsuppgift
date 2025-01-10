@@ -5,36 +5,61 @@ using MainApp.UserService.Services.Interfaces;
 namespace MainApp.UserService.Services
 {
     public class ContactService : IContactService
-        //måste implementera alla metoder som definieras i IContactService
+    //måste implementera alla metoder som definieras i IContactService
     {
         private readonly IContactsDataAccess dataAccess;
+        //interface för hantering av dataåtkomst
         private List<User> _users;
-        //
+        //lagrar en lista med användare
+
+        /// <summary>
+        /// Konstruktorn, här används dependency injection, ContactService tar emot en instans av IContactsDataAccess som en parameter vid skapandet av objektet
+        /// Contact Service constructor to get needed dependency and instantiate a new list for users.
+        /// </summary>
+        /// <param name="contactsDataAccess"></param>
         public ContactService(IContactsDataAccess contactsDataAccess)
-        //Här används dependency injection, ContactService tar emot en instans av IContactsDataAccess som en parameter vid skapandet av objektet
         {
             dataAccess = contactsDataAccess;
             _users = new List<User>();
         }
 
-                public void AddUser(string firstName, string lastName, string email, string phoneNumber, string streetAdress, string postalCode, string city)
+        /// <summary>
+        /// En metod som används för att lägga till en ny användare i listan
+        /// Adds a new user to the User List
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        /// <param name="phoneNumber"></param>
+        /// <param name="streetAdress"></param>
+        /// <param name="postalCode"></param>
+        /// <param name="city"></param>
+        public void AddUser(string firstName, string lastName, string email, string phoneNumber, string streetAdress, string postalCode, string city)
         {
             _users.Add(new User(firstName, lastName, email, phoneNumber, streetAdress, postalCode, city));
         }
 
+        /// <summary>
+        /// returnerar en lista med alla användare som lagras i _users
+        /// </summary>
+        /// <returns></returns>
         public List<User> GetUsers()
+        
         {
             return _users.ToList();
+            //gör att den ursprungliga listan inte ändras om man skulle modifiera den i andra delar av programmet
         }
 
         public void SaveUsersToFile()
+        //ansvarar för att exportera den sparade datan till en fil
         {
             dataAccess.ExportUsers(_users);
         }
 
         public void ReadUsersFromFile()
+        //läser användardata från en fil
         {
-            _users = dataAccess.ImportUsers();
+            _users = dataAccess.ImportContactsFromJsonFile();
         }
     }
 }

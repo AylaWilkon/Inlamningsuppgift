@@ -7,6 +7,7 @@ namespace MainApp
     internal class Program
     {
         private static IContactService contactService;
+        //contactService är en statisk variabel av typen IContactService, används för att interagera med tjänsten som hanterar användardata
 
         static void Main(string[] args)
         {
@@ -29,6 +30,7 @@ namespace MainApp
                 string input = RequestUserInput(menu, ValidationType.Int);
 
                 switch (input)
+                    //Switch sats för användarens alternativ
                 {
                     case "1":
                         // Lägger till en ny användare                        
@@ -57,16 +59,16 @@ namespace MainApp
                         Console.WriteLine("Inga användare tillagda.");
                         break;
                     case "3":
-                        // Läs in kontakter
+                        // Läser in kontakter
                         contactService.ReadUsersFromFile();
                         break;
                     case "4":
-                        // Spara kontakter till Json
+                        // Sparar kontakter till JSON
                         contactService.SaveUsersToFile();
                         break;
 
                     case "5":
-                        // Avsluta programmet
+                        // Avslutar programmet
                         Console.WriteLine("Avslutar programmet...");
                         running = false;
                         break;
@@ -76,7 +78,7 @@ namespace MainApp
                         break;
                 }
 
-                // Vänta på användarens input för att fortsätta
+                // Väntar på användarens input för att fortsätta
                 if (running)
                 {
                     Console.WriteLine("\nTryck på en tangent för att fortsätta...");
@@ -85,6 +87,9 @@ namespace MainApp
             }
         }
 
+        /// <summary>
+        /// hämtar alla användare, rensar konsolen och skriver ut den inmatade informationen och varje användare i formatet nedan
+        /// </summary>
         private static void PrintContacts()
         {
             Console.Clear();
@@ -96,13 +101,6 @@ namespace MainApp
             Console.WriteLine("-----------------------------------------------------");
         }
 
-
-        /// <summary>
-        /// This validates the users input with a selection of validation options. And returns the users input as string.
-        /// </summary>
-        /// <param name="question"></param>
-        /// <param name="validationType"></param>
-        /// <returns></returns>
         private static string RequestUserInput(string question, ValidationType validationType)
         {
             const string noValueProvided = "Inget värde angivet.";
