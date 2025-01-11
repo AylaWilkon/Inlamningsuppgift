@@ -51,7 +51,7 @@ namespace MainApp
                 //Switch sats för användarens alternativ
                 {
                     case "1":
-                        // Lägger till en ny användare                        
+                        // Lägger till en ny contact                        
                         string firstName = inputValidator.RequestUserInput("Ange förnamn: ", ValidationType.String);
                         string lastName = inputValidator.RequestUserInput("Ange efternamn: ", ValidationType.String);
                         string email = inputValidator.RequestUserInput("Ange email: ", ValidationType.String);
@@ -62,7 +62,7 @@ namespace MainApp
 
                         contactService.AddContact(firstName, lastName, email, phoneNumber, streetAdress, postalCode, city);
 
-                        // Skapar en ny användare med användarnamn, e-post och datum skapat
+                        // Skapar en ny contact med användarnamn, e-post och datum skapat
                         Console.WriteLine("Användare tillagd!");
                         Console.WriteLine("Vill du uppdatera din Json fil med senaste kontakten? Y/N");
 
@@ -79,7 +79,7 @@ namespace MainApp
                         break;
 
                     case "2":
-                        // Visar alla användare
+                        // Visar alla contacts
                         Console.WriteLine("Alla användare:");
                         if (contactService.GetContacts().Any())
                         {
