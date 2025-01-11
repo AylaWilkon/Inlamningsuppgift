@@ -12,9 +12,9 @@ namespace MainApp.UserService.Repository.Interfaces
         /// </summary>
         /// <returns></returns>
         List<Contact> ImportContactsFromJsonFile();
-        //Metodens syfte här är att importera användardata som ska resultera i att en lista med User-objekt returneras.
+        //Metodens syfte här är att importera användardata som ska resultera i att en lista med Contacts-objekt returneras.
         void ExportUsers(List<Contact> users);
-        //Tar emot en lista med användare och exporterar sedan datan. 
+        //Tar emot en lista med kontakter och exporterar sedan datan. 
 
         bool JsonFileExists();
     }

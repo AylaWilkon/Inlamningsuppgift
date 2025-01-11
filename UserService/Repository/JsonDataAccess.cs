@@ -5,7 +5,7 @@ using System.Text.Json;
 namespace MainApp.UserService.Repository
 {
     public class JsonDataAccess : IContactsDataAccess
-        //Här ska metoden ta en lista med användare och sedan serialisera den till JSON-format och skriva om den till strängar.
+        //Här ska metoden ta en lista med kontakter och sedan serialisera den till JSON-format och skriva om den till strängar.
     {
         private const string filePath = @"JsonExport.json";
 
@@ -31,7 +31,7 @@ namespace MainApp.UserService.Repository
             //Läser in innehållet från en fil och använder metoden ReadAllText som läser upp filens innehåll och sparar det som en sträng i variabeln jsonText
             
             var list = JsonSerializer.Deserialize<List<Contact>>(jsonText);
-            //Konverterar det som lagrats i filen till en lista med objekt av typen "User".
+            //Konverterar det som lagrats i filen till en lista med objekt av typen "Contact".
 
             if (list == null)
             {

@@ -10,11 +10,10 @@ namespace MainApp.UserService.Services
         private readonly IContactsDataAccess dataAccess;
         //interface för hantering av dataåtkomst
         private List<Contact> _users;
-        //lagrar en lista med användare
+        //lagrar en lista med contacts
 
         /// <summary>
-        /// Konstruktorn, här används dependency injection, ContactService tar emot en instans av IContactsDataAccess som en parameter vid skapandet av objektet
-        /// Contact Service constructor to get needed dependency and instantiate a new list for users.
+        /// Contact service konstruktor för användning av dependency injection och att skapa en ny lista för kontakter
         /// </summary>
         /// <param name="contactsDataAccess"></param>
         public ContactService(IContactsDataAccess contactsDataAccess)
@@ -39,7 +38,7 @@ namespace MainApp.UserService.Services
         }
 
         /// <summary>
-        /// returnerar en lista med alla användare som lagras i _users
+        /// returnerar en lista med alla användare som lagras i _contact
         /// </summary>
         /// <returns></returns>
         public List<Contact> GetContacts()

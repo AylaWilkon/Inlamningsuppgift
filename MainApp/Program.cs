@@ -117,7 +117,7 @@ namespace MainApp
         }
 
         /// <summary>
-        /// hämtar alla användare, rensar konsolen och skriver ut den inmatade informationen och varje användare i formatet nedan
+        /// hämtar alla contacts, rensar konsolen och skriver ut den inmatade informationen och varje användare i formatet nedan
         /// </summary>
         private static void PrintContacts()
         {
@@ -125,7 +125,7 @@ namespace MainApp
             foreach (var user in contactService.GetContacts())
             {
                 Console.WriteLine("-----------------------------------------------------");
-                Console.WriteLine($"Förnamn:{user.FirstName} Efternamn: {user.LastName} Epost: {user.Email}TelefonNummer: {user.PhoneNumber} Adress:{user.Adress.FullAddress}");
+                Console.WriteLine($"Förnamn: {user.FirstName}, Efternamn: {user.LastName}, Epost: {user.Email}, Mobilnummer: {user.PhoneNumber}, Adress: {user.Adress.FullAddress}");
             }
             Console.WriteLine("-----------------------------------------------------");
         }
