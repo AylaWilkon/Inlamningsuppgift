@@ -94,6 +94,9 @@ namespace MainApp
                     case "4":
                         // Sparar kontakter till JSON
                         contactService.SaveContactsToFile();
+                        Console.WriteLine("Kontakter sparade!");
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
 
                     case "5":
