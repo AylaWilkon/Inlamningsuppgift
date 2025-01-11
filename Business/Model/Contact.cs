@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
-namespace MainApp.UserService.Model
+namespace MainApp.Business.Model
 {
     public class Contact
     {
         public Guid Id { get; set; } //skapar en unik identifierare av typen guid varje gång ett nytt Contact objekt skapas
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; } //behöver vara en sträng då ett telefonnummer kan innehålla icke numeriska värden så som +, - samt ()
-        public Address Adress { get; set; }
+
+        public string FirstName { get; set; } = null!;
+        public string LastName { get; set; } = null!;
+        public string Email { get; set; } = null!;
+        public string PhoneNumber { get; set; } = null!;  //behöver vara en sträng då ett telefonnummer kan innehålla icke numeriska värden så som +, - samt ()
+        public Address Adress { get; set; } = null!;
 
         [JsonConstructor]
         //Konstruktor som bara ska användas när objektet skapas från JSON-data

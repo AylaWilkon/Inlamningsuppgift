@@ -1,13 +1,14 @@
-﻿using MainApp.UserService.Repository;
-using MainApp.UserService.Services.Interfaces;
-using MainApp.UserService.Services;
+﻿using MainApp.Business.Repository;
+using MainApp.Business.Services;
+using MainApp.Business.Services.Interfaces;
 using MainApp.Enums;
 using MainApp.Validators;
+
 namespace MainApp
 {
     internal class Program
     {
-        private static IContactService contactService;
+        private static IContactService contactService = null!;
         //contactService är en statisk property som ska nås överallt i klassen
 
         static void Main(string[] args)

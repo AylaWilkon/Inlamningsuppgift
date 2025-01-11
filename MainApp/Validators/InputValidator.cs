@@ -69,7 +69,7 @@ namespace MainApp.Validators
                     break;
             }
 
-            return new ValidatorResponse(true, string.Empty);
+            return new ValidatorResponse(isValid, string.Empty);
         }
     }
 }

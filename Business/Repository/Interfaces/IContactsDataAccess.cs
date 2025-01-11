@@ -1,8 +1,6 @@
-﻿
+﻿using MainApp.Business.Model;
 
-using MainApp.UserService.Model;
-
-namespace MainApp.UserService.Repository.Interfaces
+namespace MainApp.Business.Repository.Interfaces
 {
     public interface IContactsDataAccess
         //Deklarerar ett interface som kan användas av andra klasser i samma eller externa projekt. 

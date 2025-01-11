@@ -1,6 +1,6 @@
-﻿using MainApp.UserService.Model;
-using MainApp.UserService.Repository.Interfaces;
-using MainApp.UserService.Services;
+﻿using MainApp.Business.Model;
+using MainApp.Business.Repository.Interfaces;
+using MainApp.Business.Services;
 using Moq;
 
 namespace Tests.Services
@@ -9,7 +9,7 @@ namespace Tests.Services
     {
 
         [Fact]
-        public void ContactService_ImportUsers_SholdReturnEmptyListWhenFileNotFound()
+        public void ContactService_ReadContactsFromFile_SholdReturnEmptyListWhenFileNotFound()
         {
             //Arrange
 
@@ -49,7 +49,7 @@ namespace Tests.Services
         }
 
         [Fact]
-        public void AddUser_UserShouldBeInUserList()
+        public void AddContact_ContactShouldBeInUserList()
         {
             //Arrange
             var mockDataAccess = new Mock<IContactsDataAccess>();

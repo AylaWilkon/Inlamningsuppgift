@@ -1,8 +1,8 @@
-﻿using MainApp.UserService.Model;
-using MainApp.UserService.Repository.Interfaces;
+﻿using MainApp.Business.Model;
+using MainApp.Business.Repository.Interfaces;
 using System.Text.Json;
 
-namespace MainApp.UserService.Repository
+namespace MainApp.Business.Repository
 {
     public class JsonDataAccess : IContactsDataAccess
         //Här ska metoden ta en lista med kontakter och sedan serialisera den till JSON-format och skriva om den till strängar.

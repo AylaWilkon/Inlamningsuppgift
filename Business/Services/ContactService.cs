@@ -1,8 +1,8 @@
-﻿using MainApp.UserService.Model;
-using MainApp.UserService.Repository.Interfaces;
-using MainApp.UserService.Services.Interfaces;
+﻿using MainApp.Business.Model;
+using MainApp.Business.Repository.Interfaces;
+using MainApp.Business.Services.Interfaces;
 
-namespace MainApp.UserService.Services
+namespace MainApp.Business.Services
 {
     public class ContactService : IContactService
     //måste implementera alla metoder som definieras i IContactService

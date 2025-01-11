@@ -1,11 +1,6 @@
-﻿using MainApp.UserService.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MainApp.Business.Model;
 
-namespace MainApp.UserService.Services.Interfaces
+namespace MainApp.Business.Services.Interfaces
 {
     public interface IContactService 
     {
