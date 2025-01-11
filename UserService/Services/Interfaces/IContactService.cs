@@ -9,13 +9,13 @@ namespace MainApp.UserService.Services.Interfaces
 {
     public interface IContactService 
     {
-        List<User> GetUsers(); 
+        List<Contact> GetContacts(); 
         //returnerar en lista av User objekt
-        void AddUser(string firstName, string lastName, string email, string phoneNumber, string streetAdress, string postalCode, string city);
+        void AddContact(string firstName, string lastName, string email, string phoneNumber, string streetAdress, string postalCode, string city);
         //lägger till en ny användare och tar emot flera parametrar, är void så utför bara handlingen
-        void SaveUsersToFile();
+        void SaveContactsToFile();
         //sparar alla användare till en fil
-        void ReadUsersFromFile();
+        void ReadContactsFromFile();
         //läser in användardata från en fil, i detta fall JSON
     }
 }

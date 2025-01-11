@@ -2,18 +2,35 @@
 using MainApp.UserService.Services.Interfaces;
 using MainApp.UserService.Services;
 using MainApp.Enums;
+using MainApp.Validators;
 namespace MainApp
 {
     internal class Program
     {
         private static IContactService contactService;
-        //contactService är en statisk variabel av typen IContactService, används för att interagera med tjänsten som hanterar användardata
+        //contactService är en statisk property som ska nås överallt i klassen
 
         static void Main(string[] args)
         {
 
             bool running = true;
             contactService = new ContactService(new JsonDataAccess());
+            var inputValidator = new InputValidator();
+
+            Console.WriteLine("Vill du läsa in kontakter från Json fil? Y/N");
+
+            var readContacts = Console.ReadLine();
+            if (!string.IsNullOrEmpty(readContacts) && readContacts.ToLower() == "y")
+            {
+                contactService.ReadContactsFromFile();
+                if (!contactService.GetContacts().Any())
+                {
+                    Console.WriteLine("Inga kontakter fanns i filen eller saknas filen. ");
+                    Console.WriteLine("Tryck på enter för att fortsätta.");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+            }
 
             while (running)
             {
@@ -27,31 +44,43 @@ namespace MainApp
                     $"[5] Avsluta programmet.\n " +
                     $"Ange ditt val: ";
 
-                string input = RequestUserInput(menu, ValidationType.Int);
+                string input = inputValidator.RequestUserInput(menu, ValidationType.Int);
 
                 switch (input)
-                    //Switch sats för användarens alternativ
+                //Switch sats för användarens alternativ
                 {
                     case "1":
                         // Lägger till en ny användare                        
-                        string firstName = RequestUserInput("Ange förnamn: ", ValidationType.String);
-                        string lastName = RequestUserInput("Ange efternamn: ", ValidationType.String);
-                        string email = RequestUserInput("Ange email: ", ValidationType.String);
-                        string phoneNumber = RequestUserInput("Ange telefonnummer: ", ValidationType.String);
-                        string streetAdress = RequestUserInput("Ange gatuadress: ", ValidationType.String);
-                        string postalCode = RequestUserInput("Ange postnummer: ", ValidationType.Int);
-                        string city = RequestUserInput("Ange ort: ", ValidationType.String);
+                        string firstName = inputValidator.RequestUserInput("Ange förnamn: ", ValidationType.String);
+                        string lastName = inputValidator.RequestUserInput("Ange efternamn: ", ValidationType.String);
+                        string email = inputValidator.RequestUserInput("Ange email: ", ValidationType.String);
+                        string phoneNumber = inputValidator.RequestUserInput("Ange telefonnummer: ", ValidationType.String);
+                        string streetAdress = inputValidator.RequestUserInput("Ange gatuadress: ", ValidationType.String);
+                        string postalCode = inputValidator.RequestUserInput("Ange postnummer: ", ValidationType.Int);
+                        string city = inputValidator.RequestUserInput("Ange ort: ", ValidationType.String);
 
-                        contactService.AddUser(firstName, lastName, email, phoneNumber, streetAdress, postalCode, city);
+                        contactService.AddContact(firstName, lastName, email, phoneNumber, streetAdress, postalCode, city);
 
                         // Skapar en ny användare med användarnamn, e-post och datum skapat
                         Console.WriteLine("Användare tillagd!");
+                        Console.WriteLine("Vill du uppdatera din Json fil med senaste kontakten? Y/N");
+
+                        var importContacts = Console.ReadLine();
+                        if (!string.IsNullOrEmpty(importContacts) && importContacts.ToLower() == "y")
+                        {
+                            contactService.SaveContactsToFile();
+
+                            Console.WriteLine("Din Json fil har uppdaterats.");
+                            Console.ReadLine();
+                            Console.Clear();
+                        }                      
+
                         break;
 
                     case "2":
                         // Visar alla användare
                         Console.WriteLine("Alla användare:");
-                        if (contactService.GetUsers().Any())
+                        if (contactService.GetContacts().Any())
                         {
                             PrintContacts();
                             break;
@@ -60,11 +89,11 @@ namespace MainApp
                         break;
                     case "3":
                         // Läser in kontakter
-                        contactService.ReadUsersFromFile();
+                        contactService.ReadContactsFromFile();
                         break;
                     case "4":
                         // Sparar kontakter till JSON
-                        contactService.SaveUsersToFile();
+                        contactService.SaveContactsToFile();
                         break;
 
                     case "5":
@@ -93,58 +122,12 @@ namespace MainApp
         private static void PrintContacts()
         {
             Console.Clear();
-            foreach (var user in contactService.GetUsers())
+            foreach (var user in contactService.GetContacts())
             {
                 Console.WriteLine("-----------------------------------------------------");
                 Console.WriteLine($"Förnamn:{user.FirstName} Efternamn: {user.LastName} Epost: {user.Email}TelefonNummer: {user.PhoneNumber} Adress:{user.Adress.FullAddress}");
             }
             Console.WriteLine("-----------------------------------------------------");
-        }
-
-        private static string RequestUserInput(string question, ValidationType validationType)
-        {
-            const string noValueProvided = "Inget värde angivet.";
-            const string notANumericValueProvided = $"Angivna värdet är inte ett numeriskt värde";
-            string input = string.Empty;
-            bool isValid = false;
-
-            while (!isValid)
-            {
-                Console.WriteLine(question);
-                input = Console.ReadLine()!;
-
-                switch (validationType)
-                {
-                    case ValidationType.None:
-                        Console.Clear();
-                        isValid = true;
-                        break;
-                    case ValidationType.String:
-                        Console.Clear();
-                        if (string.IsNullOrWhiteSpace(input))
-                        {
-                            Console.WriteLine(noValueProvided);
-                            continue;
-                        }
-                        isValid = true;
-                        break;
-
-                    case ValidationType.Int:
-                        Console.Clear();
-                        if (string.IsNullOrWhiteSpace(input))
-                        {
-                            Console.WriteLine(noValueProvided);
-                        }
-                        if (!int.TryParse(input, out int number))
-                        {
-                            Console.WriteLine(notANumericValueProvided);
-                            continue;
-                        }
-                        isValid = true;
-                        break;
-                }
-            }
-            return input;
         }
     }
 }

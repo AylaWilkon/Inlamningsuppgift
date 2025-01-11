@@ -9,7 +9,7 @@ namespace MainApp.UserService.Services
     {
         private readonly IContactsDataAccess dataAccess;
         //interface för hantering av dataåtkomst
-        private List<User> _users;
+        private List<Contact> _users;
         //lagrar en lista med användare
 
         /// <summary>
@@ -20,12 +20,11 @@ namespace MainApp.UserService.Services
         public ContactService(IContactsDataAccess contactsDataAccess)
         {
             dataAccess = contactsDataAccess;
-            _users = new List<User>();
+            _users = new List<Contact>();
         }
 
         /// <summary>
         /// En metod som används för att lägga till en ny användare i listan
-        /// Adds a new user to the User List
         /// </summary>
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
@@ -34,29 +33,28 @@ namespace MainApp.UserService.Services
         /// <param name="streetAdress"></param>
         /// <param name="postalCode"></param>
         /// <param name="city"></param>
-        public void AddUser(string firstName, string lastName, string email, string phoneNumber, string streetAdress, string postalCode, string city)
+        public void AddContact(string firstName, string lastName, string email, string phoneNumber, string streetAdress, string postalCode, string city)
         {
-            _users.Add(new User(firstName, lastName, email, phoneNumber, streetAdress, postalCode, city));
+            _users.Add(new Contact(firstName, lastName, email, phoneNumber, streetAdress, postalCode, city));
         }
 
         /// <summary>
         /// returnerar en lista med alla användare som lagras i _users
         /// </summary>
         /// <returns></returns>
-        public List<User> GetUsers()
-        
+        public List<Contact> GetContacts()
         {
             return _users.ToList();
             //gör att den ursprungliga listan inte ändras om man skulle modifiera den i andra delar av programmet
         }
 
-        public void SaveUsersToFile()
+        public void SaveContactsToFile()
         //ansvarar för att exportera den sparade datan till en fil
         {
             dataAccess.ExportUsers(_users);
         }
 
-        public void ReadUsersFromFile()
+        public void ReadContactsFromFile()
         //läser användardata från en fil
         {
             _users = dataAccess.ImportContactsFromJsonFile();

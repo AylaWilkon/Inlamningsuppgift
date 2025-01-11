@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MainApp.UserService.Model
 {
-    public class User
+    public class Contact
     {
         public Guid Id { get; set; } //skapar en unik identifierare av typen guid varje gång ett nytt User objekt skapas
         public string FirstName { get; set; }
@@ -18,12 +18,12 @@ namespace MainApp.UserService.Model
 
         [JsonConstructor]
         //Konstruktor som bara ska användas när objektet skapas från JSON-data
-        private User()
+        private Contact()
         {
 
         }
 
-        public User(string firstName, string lastName, string email, string phoneNumber, string streetAdress, string postalCode, string city)
+        public Contact(string firstName, string lastName, string email, string phoneNumber, string streetAdress, string postalCode, string city)
             //publik konstruktor som gör att man kan skapa en ny användare med alla dessa egenskaper
         {
             Id = Guid.NewGuid();
